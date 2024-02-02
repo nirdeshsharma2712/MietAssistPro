@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="results.css">
+    <title>Quiz Results</title>
+</head>
+<body> 
+     <h1>Quiz Sheet</h1>
+        <div id="questions-container">
+     
+    </div>
+</body>
+<script src="results.js"></script>
+
+<style>
+    .user-answer {
+    color: #ff0000;
+    /* background-color: #ff0000; */
+width: max-content;
+}
+.correct-answer {
+ color: #02ff28; 
+ /* background-color: #02ff28; */
+}
+#liststyle{
+
+    list-style: lower-alpha;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    background-color: hsl(206, 92%, 94%);
+}
+
+#questions-container {
+    max-width: 600px;
+    text-align: left;
+    padding: 20px;
+   border: none;
+    background-color: #ffffff; 
+    border-radius: 1rem;
+    box-shadow: 0 1rem 1rem -0.7rem rgba(0, 0, 0, 0.4);
+}
+
+ h3 {
+    margin: 0px;
+    color: black;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+ul {
+    padding: 10;
+    font-weight: 100;
+    font-size: 15px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border: 1px solid #0984e3;
+}
+
+li {
+    margin-bottom: 10px; 
+} 
+
+@media (max-width: 768px) {
+    #questions-container {
+        max-width: 100%;
+    }
+}
+.button{
+    background-color: #0984e3;
+}
+
+
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const questionsContainer = document.getElementById('questions-container');
+  const quizDB = JSON.parse(localStorage.getItem('quizDB'));
+
+  if (quizDB) {
+    quizDB.forEach((question, index) => {
+      const questionDiv = document.createElement('div');
+      questionDiv.innerHTML = `
+        <h3 id="questionNo">${question.question}</h3>
+        <ul id="liststyle">
+            <li class="${localStorage.getItem(`Q${index}_A`) === 'ans1' ? (localStorage.getItem(`Q${index}_A`) === question.ans ? 'correct-answer' : 'user-answer') : (question.ans === 'ans1' ? 'correct-answer' : '')}">
+                ${question.a}
+            </li>
+            <li class="${localStorage.getItem(`Q${index}_A`) === 'ans2' ? (localStorage.getItem(`Q${index}_A`) === question.ans ? 'correct-answer' : 'user-answer') : (question.ans === 'ans2' ? 'correct-answer' : '')}">
+                ${question.b}
+            </li>
+            <li class="${localStorage.getItem(`Q${index}_A`) === 'ans3' ? (localStorage.getItem(`Q${index}_A`) === question.ans ? 'correct-answer' : 'user-answer') : (question.ans === 'ans3' ? 'correct-answer' : '')}">
+                ${question.c}
+            </li>
+            <li class="${localStorage.getItem(`Q${index}_A`) === 'ans4' ? (localStorage.getItem(`Q${index}_A`) === question.ans ? 'correct-answer' : 'user-answer') : (question.ans === 'ans4' ? 'correct-answer' : '')}">
+                ${question.d}
+            </li>
+            
+        </ul>
+      `;
+      questionsContainer.appendChild(questionDiv);
+      
+    });
+    
+  }
+  
+  const playAgainButton = document.createElement('button');
+  playAgainButton.textContent = 'Try again';
+  playAgainButton.style.display = 'block';
+  playAgainButton.style.margin = '20px auto';
+  playAgainButton.style.padding = '10px 20px';
+  playAgainButton.style.backgroundColor = '#007bff';
+  playAgainButton.style.color = '#fff';
+  playAgainButton.style.textAlign = 'center';
+  playAgainButton.style.textDecoration = 'none';
+  playAgainButton.style.border = 'none';
+  playAgainButton.style.borderRadius = '5px';
+  playAgainButton.style.cursor = 'pointer';
+  playAgainButton.style.transition = 'background-color 0.3s';
+
+  playAgainButton.addEventListener('click', () => {
+    window.location.href = 'js.html';
+  });
+  document.body.appendChild(playAgainButton);
+});
+</script>
+
+</html>
