@@ -31,7 +31,7 @@ This project uses only **frontend technologies** and can be hosted anywhere (Git
 3. 📊 Get your final score at the end of the quiz
 4. 🔄 Restart the quiz to try again and improve
 
----
+
 
 ## 🧩 Sample Features in JS
 
